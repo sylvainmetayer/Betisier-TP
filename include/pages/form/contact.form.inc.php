@@ -1,13 +1,12 @@
 <p>
   Des idées, une erreur sur le site, ou vous souhaitez tout simplement me contacter ? <br/>
   Remplissez ce formulaire, et je répondrais le plus vite à votre demande. <br/>
-  <i>Les champs précédés d'une étoile (*) sont obligatoire</i> <br/>
-  Vous pouvez également me contacter par mail : <a href="mailto:contact@sylvainmetayer.fr"><u>contact AT sylvainmetayer DOT fr</u></a>
+  <i>Les champs précédés d'une étoile (*) sont obligatoire</i>
 </p>
 <div class="bottomDocument"></div>
 <form class="pure-form pure-form-aligned" action="#" method="post">
   <div class="pure-control-group">
-    <label for="prenom">*Prenom</label>
+    <label for="prenom">*Prénom</label>
     <?php if (isConnected()) {
       ?><input type="text" name="prenom" id="prenom" value="<?php echo getPersonneConnectee()->getPerPrenom(); ?>" required><?php
     } else {

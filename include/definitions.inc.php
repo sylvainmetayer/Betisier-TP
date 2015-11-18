@@ -1,6 +1,6 @@
 <?php
 define('NOM_LECTURE_FICHIER', "ideesCitations.txt");
-define('PWD_INTERDIT', "forbiddenPwd.pwd");
+//define('PWD_INTERDIT', "forbiddenPwd.pwd"); Obselete
 define('SIMUL_MAIL', "simulationMail.txt");
 
 /*

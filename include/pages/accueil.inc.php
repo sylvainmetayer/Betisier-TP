@@ -36,7 +36,18 @@ if (is_null($citation)) {
 
   <?php include("include/pages/tab/afficherUneCitation.tab.inc.php"); ?>
 </table>
-<?php } ?>
+<?php }
+
+//Car il faut toujours garder son système à jour !
+$version = explode(".",phpversion());
+if (intval($version[0]) < 5 || intval($version[1]) < 5) {
+  ?>
+  <p>
+    <a href="http://php.net/downloads.php">Votre version de php commence à être ancienne... Peut-être devriez vous songer à la mettre à jour</a> ?
+  </p>
+  <?php
+}
+?>
 
 <img class="centreImage" src="image/logo.gif" alt="Betisier IUT" title="Betisier IUT Limousin"/>
 <div class="bottomDocument"></div>

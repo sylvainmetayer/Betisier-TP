@@ -229,7 +229,8 @@
     return (!empty($pwd) && strlen($pwd) >= 6 && empty($isPwdForbidden));
   }
 
-	/*Permet de savoir si un mot est dans un fichier*/
+	/* FONCTION obselete depuis que les mots de passe interdits sont en base
+	/*Permet de savoir si un mot est dans un fichier
 	function isWordInFile($mot) {
 		$ptr = fopen(PWD_INTERDIT, "r");
 		$contenu = fread($ptr, filesize(PWD_INTERDIT));
@@ -243,8 +244,7 @@
 			}
 		}
 		return false;
-
-	}
+	}*/
 
 	/*Permet d'obtenir une phrase tirée du fichier NOM_LECTURE_FICHIER aléatoirement.*/
 	function getPhraseAleatoire() {
@@ -283,10 +283,4 @@
 		if (isset($_SESSION["pwdChanged"]))
 			unset($_SESSION['pwdChanged']);
 	}
-
-	/*Fonction temporaire permettant de garder le jeux d'essai intact.*/
-	function garderJeuxEssais() {
-		throw new ExceptionPerso("Pas touche au jeux d'essais !", ExceptionPerso::ERR_CRITIQUE);
-	}
-
 ?>

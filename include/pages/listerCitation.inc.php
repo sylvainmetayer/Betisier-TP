@@ -42,8 +42,7 @@ if (intval($nbCitations) === 0) {
 			<?php
 			if (!isConnected()) {
 				?>
-				<br/>Seules les <?php echo $nbCitationsListees; ?> premières seront listées ici. <br/>
-				<a href="index.php?page=<?php echo INFORMATIONS; ?>">Inscrivez vous pour voir toutes les citations !</a>
+				<br/>Seules les <?php echo $nbCitationsListees; ?> premières seront listées ici.
 				<?php
 			}
 			?>

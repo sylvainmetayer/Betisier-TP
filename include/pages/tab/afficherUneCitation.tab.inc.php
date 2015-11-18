@@ -7,7 +7,7 @@ $etudiant = $personneManager->getPersonne($citation->getCitationPerNumEtu());
   <td> <?php echo $detailsPersonne->getPerNom()." ". $detailsPersonne->getPerPrenom(); ?> </td>
   <td> <?php echo $citation->getCitationLibelle(); ?> </td>
   <td> <?php echo getFrenchDate($citation->getCitationDate()); ?> </td>
-  <td> <?php $moyenneVote ? print $moyenneVote : print "-" ;?> </td>
+  <td> <?php $moyenneVote ? print number_format($moyenneVote, 2) : print "-" ;?> </td>
 
   <?php if (isConnected() && $personneManager->isEtudiant(getPersonneConnectee()->getPerNum())) { ?>
   <td>
@@ -18,7 +18,7 @@ $etudiant = $personneManager->getPersonne($citation->getCitationPerNumEtu());
     $voteEtudiant = $voteManager->getVoteEtudiant(getPersonneConnectee()->getPerNum(), $citation->getCitationNum());
     $valeurVote = $voteEtudiant->getVotValeur();
     ?>
-    <img alt="Deja vote !" src="image/erreur.png"/>&nbsp;Votre note : <?php empty($valeurVote) ? print "0" : print $voteEtudiant->getVotValeur();
+    <img alt="Deja vote !" src="image/erreur.png"/>&nbsp;Votre note : <?php empty($valeurVote) ? print "0" : print number_format($voteEtudiant->getVotValeur(), 2);
   }
   ?>
   </td>
