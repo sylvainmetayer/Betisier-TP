@@ -2,7 +2,6 @@
 define('NOM_LECTURE_FICHIER', "ideesCitations.txt");
 define('PWD_INTERDIT', "forbiddenPwd.pwd");
 define('SIMUL_MAIL', "simulationMail.txt");
-define('SANDBOX', 3);
 
 /*
 Définitions personnelles

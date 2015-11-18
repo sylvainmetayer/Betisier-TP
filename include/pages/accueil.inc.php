@@ -36,10 +36,7 @@ if (is_null($citation)) {
 
   <?php include("include/pages/tab/afficherUneCitation.tab.inc.php"); ?>
 </table>
-<?php }
-
-include("include/pages/idConnexion.inc.php");
-?>
+<?php } ?>
 
 <img class="centreImage" src="image/logo.gif" alt="Betisier IUT" title="Betisier IUT Limousin"/>
 <div class="bottomDocument"></div>
