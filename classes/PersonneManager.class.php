@@ -55,7 +55,7 @@ class PersonneManager {
 
     if ( !isPwdStrongEnough($pwdEnClair) ) {
       quitterModifierPersonne();
-      throw new ExceptionPerso("Mot de passe correct, vos informations ont été enregistrées.<br/>Néanmoins, votre mot de passe n'a pas été mis à jour pour la raison suivante :<br/>Merci de choisir un mot de passe plus complexe (composé de plus de 6 caractères, et complexe à deviner) ", ExceptionPerso::ERR_PERSONNE);
+      throw new ExceptionPerso("Merci de choisir un mot de passe plus complexe (composé de plus de 6 caractères, et difficile à deviner) ", ExceptionPerso::ERR_PERSONNE);
     }
 
     $sql = "UPDATE personne SET per_pwd =:per_pwd WHERE per_num=:per_num";
