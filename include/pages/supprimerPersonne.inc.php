@@ -16,8 +16,6 @@ if (empty($_GET['id'])) {
 		throw new ExceptionPerso("Merci de ne pas modifier volontairement les données envoyées !", ExceptionPerso::ERR_URL);
 	}
 
-	//Si on veut vraiment supprimer l'utilisateur SANDBOX, on peut, un message indiquera que l'utilsateur sandbox n'est plus existant.
-
 	$retour = $personneManager->deleteByPerNum($pernum);
 
 	if ($retour === true) {

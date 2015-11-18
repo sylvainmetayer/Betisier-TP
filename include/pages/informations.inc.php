@@ -52,17 +52,17 @@
 
 <p> Fonctionnalités basiques </p>
   <ul>
+    <li>Programmation modulaire exigée</li>
     <li>Gestion des droits (notion d'accès restreint)</li>
+    <li>Conception Objet (Classe, Manager, PDO, ..)</li>
+    <li>Gestion des connexions utilisateurs (notion de session)</li>
     <li>Listage, modification et suppression des villes </li>
     <li>Listage, ajout, modification et suppression de personne</li>
     <li>Liste, ajout, suppression, et validation de citation</li>
-    <li>Gestion des connexions utilisateurs (notion de session)</li>
-    <li>Conception Objet (Classe, Manager, PDO, ..)</li>
     <li>Lors de l'ajout d'une citation, certains mots sont interdits</li>
     <li>Une citation ne peut-être affichée publiquement et ouverte au vote que si elle a été approuvée par un administrateur</li>
     <li>Possiblité pour les élèves de voter pour des citations, avec attribution d'une note</li>
     <li>Site valide W3C (HTML et CSS)</li>
-    <li>Programmation modulaire exigée</li>
   </ul>
 <p> Fonctionnalités "supplémentaire" </p>
   <ul>
@@ -78,7 +78,6 @@
     <li>Gestion des mots interdits (ajout/suppression/modification)</li>
     <li>Lors de l'inscription, interdiction d'utiliser un mot de passe trop simple (<a href="http://www.businessinsider.com/twitters-list-of-370-banned-passwords-2009-12">Plus d'informations ici</a>)</li>
     <li>Une personne connectée peut changer son mot de passe</li>
-    <li>Gestion d'un utilisateur "sandbox", servant de démonstration au public (et par conséquent, non modifiable)</li>
     <li>Référencement plutôt bon ! (Essayez de rechercher "betisier IUT" ou "betisier sylvain metayer")</li>
   </ul>
 

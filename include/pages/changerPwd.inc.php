@@ -4,10 +4,6 @@ if (!isConnected() || !is_numeric($_GET['id']) || $_GET['id'] != getPersonneConn
   throw new ExceptionPerso("Vous semblez astucieux, mais à malin, malin et demi ! <br/>Vous n'avez pas les droits pour afficher cette page !", ExceptionPerso::ERR_DROITS);
 }
 
-if(intval($_GET['id']) === SANDBOX) {
-  throw new ExceptionPerso("Il est impossible de changer le mot de passe de cet utilisateur, il s'agit d'un utilisateur démo ! <br/>Merci de vous créer un compte si vous souhaitez modifier vos informations.", ExceptionPerso::ERR_PERSONNE);
-}
-
 ?> <h1> Changement de votre mot de passe </h1> <?php
 if (empty($_POST['oldPwd']) && empty($_POST['newPwd']) && empty($_POST["newPwdConfirmation"])) {
   include("include/pages/form/modifierPwd.form.inc.php");

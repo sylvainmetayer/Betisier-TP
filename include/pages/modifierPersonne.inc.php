@@ -11,10 +11,6 @@ if (empty($_GET['id'])) {
   throw new ExceptionPerso("Merci de ne pas modifier l'url !", ExceptionPerso::ERR_URL);
 } else {
 
-  if(intval($_GET['id']) === SANDBOX) {
-    throw new ExceptionPerso("Il est impossible de modifier cet utilisateur, il s'agit d'un utilisateur démo ! <br/>Merci de modifier un autre utilisateur.", ExceptionPerso::ERR_PERSONNE);
-  }
-
   $modifFinie = false;
   $pdo = new Mypdo();
   $personneManager = new PersonneManager($pdo);
