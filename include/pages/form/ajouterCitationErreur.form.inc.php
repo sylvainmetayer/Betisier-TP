@@ -22,3 +22,5 @@
     </div>
   <input type="submit" class="pure-button button-secondary" value="Valider">
 </form>
+
+<div class="bottomDocument"></div>
