@@ -46,23 +46,30 @@ if (empty($_POST)) {
     $personneManager = new PersonneManager($pdo);
     ?>
     <table class="sortable" >
-  		<tr>
-  			<th> &nbsp;Nom de l'enseignant &nbsp;</th>
-  			<th> Libellé </th>
-  			<th> Date de dépôt</th>
-  			<th> &nbsp; Moyenne des notes &nbsp;</th>
-  		</tr>
+			<tr>
+				<th> &nbsp;Nom de l'enseignant &nbsp;</th>
+				<th> Libellé </th>
+				<th> Date</th>
+				<th> &nbsp; Moyenne des notes &nbsp;</th>
+				<?php
+				if (isConnected() && $personneManager->isEtudiant(getPersonneConnectee()->getPerNum())) {
+				?>
+				<th>Noter</th>
+				<?php
+				}
+				if (isConnected() && getPersonneConnectee()->isPerAdmin()) {
+				?>
+				<th> Déposé par </th>
+				<th> Validé par </th>
+				<th> Modération </th>
+				<th> Supprimer </th>
+				<?php
+				} ?>
+			</tr>
   		<?php
   		foreach ($resultat as $citation) {
-  			$moyenneVote = $voteManager->getMoyenneVote($citation->getCitationNum());
-  			$detailsPersonne = $personneManager->getPersonne($citation->getCitationPerNum());
-  			?> <tr>
-  					<td> <?php echo $detailsPersonne->getPerNom()." ". $detailsPersonne->getPerPrenom(); ?> </td>
-  					<td> <?php echo $citation->getCitationLibelle(); ?> </td>
-  					<td> <?php echo getFrenchDate($citation->getCitationDate()); ?> </td>
-  					<td> <?php $moyenneVote ? print $moyenneVote : print "Pas encore de vote !" ;?> </td>
-  				</tr>
-  		<?php } ?>
+  		    include("include/pages/tab/afficherUneCitation.tab.inc.php");
+      } ?>
   	</table>
     <a href="index.php?page=<?php echo RECHERCHER_CITATIONS;?>">
       <b> Faire une nouvelle recherche </b>

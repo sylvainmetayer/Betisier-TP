@@ -39,4 +39,5 @@
           <?php } ?>
     </tr>
   </table>
+  <p>Appuyez sur F5 pour un autre avatar !</p>
   <div class="bottomDocument"></div>

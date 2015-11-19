@@ -63,7 +63,7 @@ class MotManager {
       throw new ExceptionPerso("Ce mot est déjà interdit !", ExceptionPerso::ERR_MOT);
     }
 
-    if (strlen($mot->getMotInterdit()) < 3 ) {
+    if (strlen($mot->getMotInterdit()) <= 3 ) {
       throw new ExceptionPerso("Un mot interdit doit est composé d'au moins 3 lettres !", 1);
     }
 
@@ -104,7 +104,7 @@ class MotManager {
       throw new ExceptionPerso("Ce mot est déjà interdit !", ExceptionPerso::ERR_MOT);
     }
 
-    if (strlen($mot->getMotInterdit()) < 3 ) {
+    if (strlen($mot->getMotInterdit()) <= 3 ) {
       throw new ExceptionPerso("Un mot interdit doit est composé d'au moins 3 lettres !", 1);
     }
 
