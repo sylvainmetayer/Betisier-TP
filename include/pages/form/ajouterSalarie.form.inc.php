@@ -2,7 +2,7 @@
 
   <div class="pure-control-group">
     <label for="sal_telprof">T&eacute;l&eacute;phone professionnel</label>
-    <input type='text' name='sal_telprof' id="sal_telprof" pattern="^(?:0|\(?\+33\)?\s?|0033\s?)[1-79](?:[\.\-\s]?\d\d){4}$" required>
+    <input type='tel' name='sal_telprof' id="sal_telprof" required>
   </div>
 
   <div class="pure-control-group">

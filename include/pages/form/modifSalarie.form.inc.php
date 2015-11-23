@@ -6,7 +6,7 @@
 
       <div class="pure-control-group">
         <label for="sal_telprof">T&eacute;l&eacute;phone professionnel :</label>
-        <input type='text' id="sal_telprof" name='sal_telprof' pattern="^(?:0|\(?\+33\)?\s?|0033\s?)[1-79](?:[\.\-\s]?\d\d){4}$" value="<?php echo $salarie->getSalTelProf(); ?>" required>
+        <input type='tel' id="sal_telprof" name='sal_telprof' value="<?php echo $salarie->getSalTelProf(); ?>" required>
       </div>
 
       <div class="pure-control-group">

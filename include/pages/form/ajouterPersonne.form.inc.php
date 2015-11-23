@@ -8,13 +8,13 @@
     </div>
 
     <div class="pure-control-group">
-      <label for="pre_nom">Nom : </label>
+      <label for="per_nom">Nom : </label>
       <input type="text" id="per_nom" name="per_nom" required>
     </div>
 
     <div class="pure-control-group">
       <label for="per_tel">T&eacute;l&eacute;phone : </label>
-      <input type="text" name="per_tel" id="per_tel" pattern="^(?:0|\(?\+33\)?\s?|0033\s?)[1-79](?:[\.\-\s]?\d\d){4}$" placeholder="[0]xxxxxxxxx" required>
+      <input type="tel" name="per_tel" id="per_tel" placeholder="[0]xxxxxxxxx" required>
     </div>
 
     <div class="pure-control-group">
@@ -43,7 +43,7 @@
     </div>
 
     <div class="pure-control-group">
-      <label for="categorie">
+      <label for="categorie" class="pure-radio">
         Cat&eacute;gorie
       </label>
 

@@ -10,14 +10,14 @@
     </div>
 
     <div class="pure-control-group">
-      <label for="pre_nom">Nom : </label>
+      <label for="per_nom">Nom : </label>
       <input type="text" name="per_nom" id="per_nom" value="<?php echo $personne->getPerNom(); ?>" required> <br/>
     </div>
 
 
     <div class="pure-control-group">
       <label for="per_tel">T&eacute;l&eacute;phone : </label>
-      <input type="text" name="per_tel" id="per_tel" pattern="^(?:0|\(?\+33\)?\s?|0033\s?)[1-79](?:[\.\-\s]?\d\d){4}$" placeholder="[0]xxxxxxxxx" value="<?php echo $personne->getPerTel(); ?>" required> <br/>
+      <input type="tel" name="per_tel" id="per_tel" placeholder="[0]xxxxxxxxx" value="<?php echo $personne->getPerTel(); ?>" required> <br/>
     </div>
 
     <div class="pure-control-group">
