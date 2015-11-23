@@ -7,7 +7,7 @@ if (!isConnected()) {
 
 }
 
-afficherMessageSucces("Vous avez été déconnecté..  Redirection en cours.");
+afficherMessageSucces("Vous avez été déconnecté, à bientôt !");
 
 if (isConnected()) {
   unset($_SESSION['personneConnectee']);

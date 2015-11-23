@@ -1,6 +1,5 @@
 <script> changerTitre("Informations"); </script>
 
-
 <h1>Informations sur ce TP</h1>
 
 <table class="pure-table sortable">
@@ -50,25 +49,24 @@
 </p>
 
 
-<p> Fonctionnalités basiques </p>
+<p> Fonctionnalités demandées </p>
   <ul>
-    <li>Programmation modulaire exigée</li>
-    <li>Gestion des droits (notion d'accès restreint)</li>
     <li>Conception Objet (Classe, Manager, PDO, ..)</li>
-    <li>Gestion des connexions utilisateurs (notion de session)</li>
-    <li>Listage, modification et suppression des villes </li>
+    <li>Programmation modulaire exigée</li>
+    <li>Gestion des droits d'accès aux différentes fonctionnalités (connexion et droits d'accès)</li>
+    <li>Listage, modification et suppression des villes</li>
     <li>Listage, ajout, modification et suppression de personne</li>
     <li>Liste, ajout, suppression, et validation de citation</li>
     <li>Lors de l'ajout d'une citation, certains mots sont interdits</li>
     <li>Une citation ne peut-être affichée publiquement et ouverte au vote que si elle a été approuvée par un administrateur</li>
-    <li>Possiblité pour les élèves de voter pour des citations, avec attribution d'une note</li>
-    <li>Site valide W3C (HTML et CSS)</li>
+    <li>Possiblité pour les élèves de voter pour des citations</li>
+    <li>Le site doit être valide W3C (HTML et CSS)</li>
   </ul>
 <p> Fonctionnalités "supplémentaire" </p>
   <ul>
     <li>Les tableaux sont triables (cliquer sur l'en-tête pour effectuer un tri)</li>
     <li>Utilisation des exceptions pour contrôler les différentes erreurs possibles</li>
-    <li>Contrôle des numéros de téléphone</li>
+    <li>Contrôle des numéros de téléphone (composé de 10 chiffres)</li>
     <li>Changement du titre de la page de façon dynamique (javascript)</li>
     <li>Affichage aléatoire d'un avatar pour les détails d'une personne</li>
     <li>Affichage d'une phrase aléatoire lors de l'ajout d'une citation</li>
@@ -78,7 +76,7 @@
     <li>Gestion des mots interdits (ajout/suppression/modification)</li>
     <li>Lors de l'inscription, interdiction d'utiliser un mot de passe trop simple (<a href="http://www.businessinsider.com/twitters-list-of-370-banned-passwords-2009-12">Plus d'informations ici</a>)</li>
     <li>Une personne connectée peut changer son mot de passe</li>
-    <li>Référencement plutôt bon ! (Essayez de rechercher "betisier IUT" ou "betisier sylvain metayer")</li>
+    <li>Test du référencement (Essayez de rechercher "betisier IUT" ou "betisier sylvain metayer" sur Google)</li>
   </ul>
 
 </div>

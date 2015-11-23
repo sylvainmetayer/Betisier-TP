@@ -14,14 +14,12 @@
 	}
 
 	/*
-  Cette fonction permet de savoir si un numero de telephone contient bien 10 chiffres et s'il correspond au format francais.
+  Cette fonction permet de savoir si un numero de telephone contient bien 10 chiffres
   */
   function isCorrectNumeroDeTelephone($tel) {
       if (!is_numeric($tel))
         return false;
-      if (strlen($tel) !== 10)
-        return false;
-      return preg_match("#(\+[0-9]{2}\([0-9]\))?[0-9]{10}#", $tel) == 1;
+      return strlen($tel) === 10;
   }
 
 	/*Cette fonction permet de vérifier le format d'un email*/

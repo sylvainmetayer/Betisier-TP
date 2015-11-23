@@ -42,7 +42,7 @@ class Salarie extends Personne {
 
 	public function setSalTelprof($salTelprof){
     if (!isCorrectNumeroDeTelephone($salTelprof)) {
-      throw new ExceptionPerso("Le numero de téléphone doit etre sur 10 chiffre", ExceptionPerso::ERR_TEL);
+      throw new ExceptionPerso("Le numero de téléphone doit etre sur 10 chiffres", ExceptionPerso::ERR_TEL);
     }
     $this->sal_telprof = $salTelprof;
 	}
