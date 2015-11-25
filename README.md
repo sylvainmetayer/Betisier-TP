@@ -1,8 +1,8 @@
 # Betisier-TP
- 
+
 DUT Informatique 2ème Année. Ce site est disponible à l'adresse suivante : [Betisier de Sylvain Metayer](http://www.betisier.sylvainmetayer.fr)
- 
- 
+
+
 ## 1- Informations
 - Les mots interdits doivent être constitué au minimum de 3 lettres, il s'agit d'un réglage MySQL. [Détails ici](http://stackoverflow.com/a/17797003)
 - Le fichier "simulationMail.txt" doit avoir les droits rw-, car des écritures sont faites sur ce fichier.
@@ -36,6 +36,7 @@ DUT Informatique 2ème Année. Ce site est disponible à l'adresse suivante : [B
 - Lors de l'inscription, interdiction d'utiliser un mot de passe trop simple ([Plus d'informations ici](http://www.businessinsider.com/twitters-list-of-370-banned-passwords-2009-12))
 - Une personne connectée peut changer son mot de passe
 - Test du référencement (Essayez de rechercher "betisier IUT" ou "betisier sylvain metayer" sur Google)
+- On masque les données "sensibles" (détails personnes) aux utilisateurs non connectés
 
 ## 4-Mise en service
 1. Importer la base "betisier.sql" dans une base de données.

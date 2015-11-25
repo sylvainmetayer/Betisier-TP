@@ -228,22 +228,31 @@
     return (!empty($pwd) && strlen($pwd) >= 6 && empty($isPwdForbidden));
   }
 
-	/* FONCTION obselete depuis que les mots de passe interdits sont en base
-	/*Permet de savoir si un mot est dans un fichier
-	function isWordInFile($mot) {
-		$ptr = fopen(PWD_INTERDIT, "r");
-		$contenu = fread($ptr, filesize(PWD_INTERDIT));
+	/*Fonction qui masque les détails d'une personne a un utilisateur non connecté. */
+	function maskData($data) {
+		$len = strlen($data);
 
-		fclose($ptr);
-		$contenu = explode(PHP_EOL, $contenu);
-
-		foreach ($contenu as $cle => $valeur) {
-			if (strtolower($mot) === strtolower($valeur)) {
-				return true;
-			}
+		if ($len < 5) {
+			//On ne masque pas les infos pour 5 caractères..
+			return $data;
 		}
-		return false;
-	}*/
+
+		$retour = "";
+
+		$retour = $data[0];
+		for ($i = 0; $i < $len - 3; $i++) {
+			$retour.= "*";
+			//On masque
+		}
+
+		for ($i = $len -3; $i < $len; $i++) {
+			$retour.= $data[$i];
+			//On affiche les 3 derniers caractères
+		}
+
+		return $retour;
+
+	}
 
 	function lireFichier($file) {
 		$fichier=file($file);
