@@ -245,6 +245,11 @@
 		return false;
 	}*/
 
+	function lireFichier($file) {
+		$fichier=file($file);
+		return $fichier;
+	}
+
 	/*Permet d'obtenir une phrase tirée du fichier NOM_LECTURE_FICHIER aléatoirement.*/
 	function getPhraseAleatoire() {
 		$fichier = file(NOM_LECTURE_FICHIER);
