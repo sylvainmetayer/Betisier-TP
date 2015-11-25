@@ -53,20 +53,19 @@ if (empty($_POST['cit_libelle'])) {
 
   if ($ajoutAutorise) {
     //seul un etudiant peut ajouter une citation sur un prof
-
-        $citation = new Citation(Array(
+		$citation = new Citation(Array(
           'per_num' => $_POST['per_num'], //le prof sur qui est la blague
           'per_num_valide' => NULL, //le numero de la personne qui a valide
           'per_num_etu' => getPersonneConnectee()->getPerNum(), //l'etudiant
           'cit_libelle' => $_POST['cit_libelle'], //la citation
-          'cit_date' => NULL, //maintenant, format string --> géré par le manager
+          'cit_date' => $_POST['cit_date_depo'], //la date de depot de la citation, saisie dans le formulaire
           'cit_valide' => 0, //si la citation est validé pour apparaitre en public
           'cit_date_valide' => NULL, //la date a laquelle ça a été validé
-          'cit_date_depo' => $_POST['cit_date_depo'] //la date saisie dans le formulaire
+          'cit_date_depo' => NULL, //maintenant (pour savoir quand a été déposé la citation), format string --> géré par le manager
         ));
-
+		
         $retour = $citationManager->add($citation);
-
+		
         if ($retour != 0) {
           afficherMessageSucces("Citation ajoutée ! ");
           redirection(2, AJOUTER_CITATION);

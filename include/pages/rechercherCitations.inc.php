@@ -28,8 +28,16 @@ if (empty($_POST)) {
   //var_dump($recherche);
 
   $citationManager = new CitationManager($pdo);
+  
+  //var_dump(getPersonneConnectee()->isPerAdmin());
+  
+  if (!isConnected() || !getPersonneConnectee()->isPerAdmin()) {
+	  $isAdmin = 0;
+  } else {
+	  $isAdmin = 1;
+  }
 
-  $resultat = $citationManager->search($recherche);
+  $resultat = $citationManager->search($recherche, $isAdmin);
 
   if (empty($resultat)) {
     ?>

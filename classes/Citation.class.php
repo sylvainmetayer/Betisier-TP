@@ -75,6 +75,9 @@ class Citation {
 	}
 
 	public function setCitationDate($valeur) {
+		if (!isCorrectDate($valeur)) {
+			throw new ExceptionPerso("La date de dépot de la citation ne peut être dans le futur ! Il faut qu'elle ai été prononcée d'abord.", ExceptionPerso::ERR_DATE);
+		}
 		$this->cit_date = $valeur;
 	}
 
@@ -113,9 +116,6 @@ class Citation {
 	}
 
 	public function setCitationDateDepot($valeur) {
-		if (!isCorrectDate($valeur)) {
-			throw new ExceptionPerso("La date de dépot de la citation ne peut être dans le futur ! Il faut qu'elle ai été prononcée d'abord.", ExceptionPerso::ERR_DATE);
-		}
 		$this->cit_date_depo = $valeur;
 	}
 

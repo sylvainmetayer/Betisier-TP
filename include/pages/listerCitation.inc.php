@@ -59,10 +59,10 @@ if (intval($nbCitations) === 0) {
 				?>
 				<p>
 					<img src="image/work.gif" alt="Au travail"/>	Il reste <?php echo count($citationManager->getCitationsEnAttente()); ?> citation(s) à modérer<br/>
-					<img src="image/erreur.png" alt"Refuser la citation"/> Refuser la citation <br/>
-					<img src="image/valid.png" alt"Approuver la citation"/> Approuver la citation <br/>
+					<img src="image/erreur.png" alt="Refuser la citation"/> Refuser la citation <br/>
+					<img src="image/valid.png" alt="Approuver la citation"/> Approuver la citation <br/>
 					<img src="image/approuvee.ico" alt="Citation approuvée"/> Déjà modérée, et approuvée <br/>
-					<img src="image/non-approuver.png" alt"Citation refusée"/> Déjà modérée, et refusée <br/>
+					<img src="image/non-approuver.png" alt="Citation refusée"/> Déjà modérée, et refusée <br/>
 
 				</p>
 

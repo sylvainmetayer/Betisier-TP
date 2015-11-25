@@ -1,7 +1,6 @@
 <script> changerTitre("Modifier un salarié"); </script>
 
 <?php
-var_dump($_SESSION);
 $salarie = $salarieManager->getSalarie($personne->getPerNum());
 
 if(empty($_POST['sal_telprof'])) {

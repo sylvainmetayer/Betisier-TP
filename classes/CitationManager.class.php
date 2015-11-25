@@ -9,7 +9,7 @@ class CitationManager {
   /* Prend en paramètre un objet citation, et l'ajoute dans la base de données. Retourne qqch != 0 si l'insertion s'est mal passée. */
   public function add($citation) {
     $sql = "INSERT INTO citation (per_num, per_num_valide, per_num_etu, cit_libelle, cit_date, cit_valide, cit_date_valide, cit_date_depo)
-    VALUES (:per_num, :per_num_valide, :per_num_etu, :cit_libelle, NOW(), :cit_valide, :cit_date_valide, :cit_date_depo)";
+    VALUES (:per_num, :per_num_valide, :per_num_etu, :cit_libelle, :cit_date, :cit_valide, :cit_date_valide, NOW())";
 
     $requete = $this->db->prepare($sql);
 
@@ -19,8 +19,8 @@ class CitationManager {
     $requete->bindValue(":cit_libelle", $citation->getCitationLibelle());
     $requete->bindValue("cit_valide", false);
     $requete->bindValue("cit_date_valide", $citation->getCitationDateValide());
-    $dateDepot = getEnglishDate($citation->getCitationDateDepot());
-    $requete->bindValue("cit_date_depo", $dateDepot);
+    $dateDepot = getEnglishDate($citation->getCitationDate());
+    $requete->bindValue("cit_date", $dateDepot);
 
     $retour = $requete->execute();
     return $retour;
@@ -29,9 +29,18 @@ class CitationManager {
   /*
   Permet d'effectuer une recherche avec un tableau passé en paramètre, contenant une note, une date et un prof. Les données peuvent-être vide.
   Le $code dans les if est uniquement utilisé à des fins de test.
+  
   */
-  public function search($recherche) {
-
+  public function search($recherche, $isAdmin) {
+	//var_dump(getEnglishDate($recherche['date']));
+	
+	
+	if (!$isAdmin) {
+		$hide = " AND cit_valide = 1 AND cit_date_valide IS NOT NULL";
+	} else {
+		$hide = "";
+	}
+	
     $sql = "SELECT c.cit_num, c.per_num, per_num_etu, per_num_valide, cit_libelle, cit_date, cit_date_depo, cit_date_valide, cit_valide ";
 
     /*
@@ -62,21 +71,24 @@ class CitationManager {
 
     if (empty($note) && empty($recherche["prof"]) && !empty($recherche["date"])) {
       $code = 2;
-      $sql .= " FROM citation c WHERE cit_date_depo=:date AND cit_valide=1 AND cit_date_valide IS NOT NULL";
+      $sql .= " FROM citation c WHERE cit_date=:date";
+	  $sql .= $hide;
       $requete = $this->db->prepare($sql);
       $requete->bindValue(":date", getEnglishDate($recherche["date"]));
     }
 
     if (empty($note) && !empty($recherche["prof"]) && empty($recherche["date"])) {
       $code = 3;
-      $sql .= " FROM citation c WHERE c.per_num=:prof AND cit_valide=1 AND cit_date_valide IS NOT NULL";
+      $sql .= " FROM citation c WHERE c.per_num=:prof ";
+	  $sql .= $hide;
       $requete = $this->db->prepare($sql);
       $requete->bindValue(":prof", $recherche["prof"]);
     }
 
     if (empty($note) && !empty($recherche["prof"]) && !empty($recherche["date"])) {
       $code = 4;
-      $sql .= " FROM citation c WHERE cit_date_depo=:date AND c.per_num=:prof AND cit_valide=1 AND cit_date_valide IS NOT NULL";
+      $sql .= " FROM citation c WHERE cit_date=:date AND c.per_num=:prof ";
+	  $sql .= $hide;
       $requete = $this->db->prepare($sql);
       $requete->bindValue(":date", getEnglishDate($recherche["date"]));
       $requete->bindValue(":prof", $recherche["prof"]);
@@ -84,14 +96,22 @@ class CitationManager {
 
     if (!empty($note) && empty($recherche["prof"]) && empty($recherche["date"])) {
       $code = 5;
-      $sql .= " FROM citation c JOIN vote v ON c.cit_num=v.cit_num WHERE cit_valide=1 AND cit_date_valide IS NOT NULL GROUP BY c.cit_num HAVING AVG(vot_valeur)=:note";
+	  if (!$isAdmin) {
+		$sql .= " FROM citation c JOIN vote v ON c.cit_num=v.cit_num WHERE cit_valide=1 AND cit_date_valide IS NOT NULL GROUP BY c.cit_num HAVING AVG(vot_valeur)=:note";  
+	  } else {
+		$sql .= " FROM citation c JOIN vote v ON c.cit_num=v.cit_num GROUP BY c.cit_num HAVING AVG(vot_valeur)=:note";  
+	  }
       $requete = $this->db->prepare($sql);
       $requete->bindValue(":note", $note === "zero" ? 0 : floatval($note));
     }
 
     if (!empty($note) && empty($recherche["prof"]) && !empty($recherche["date"])) {
       $code = 6;
-      $sql .= " FROM citation c JOIN vote v on v.cit_num=c.cit_num WHERE cit_date_depo=:date AND cit_valide=1 AND cit_date_valide IS NOT NULL GROUP BY c.cit_num HAVING AVG(vot_valeur)=:note";
+	  if (!$isAdmin) {
+		$sql .= " FROM citation c JOIN vote v on v.cit_num=c.cit_num WHERE cit_date=:date AND cit_valide=1 AND cit_date_valide IS NOT NULL GROUP BY c.cit_num HAVING AVG(vot_valeur)=:note";   
+	  } else {
+		$sql .= " FROM citation c JOIN vote v on v.cit_num=c.cit_num WHERE cit_date=:date GROUP BY c.cit_num HAVING AVG(vot_valeur)=:note";
+	  }
       $requete = $this->db->prepare($sql);
       $requete->bindValue(":note", $note === "zero" ? 0 : floatval($note));
       $requete->bindValue(":date", getEnglishDate($recherche["date"]));
@@ -99,7 +119,11 @@ class CitationManager {
 
     if (!empty($note) && !empty($recherche["prof"]) && empty($recherche["date"])) {
       $code = 7;
-      $sql .= " FROM citation c JOIN vote v on v.cit_num=c.cit_num WHERE c.per_num=:prof AND cit_valide=1 AND cit_date_valide IS NOT NULL GROUP BY c.cit_num HAVING AVG(vot_valeur)=:note";
+	  if (!$isAdmin) {
+		$sql .= " FROM citation c JOIN vote v on v.cit_num=c.cit_num WHERE c.per_num=:prof AND cit_valide=1 AND cit_date_valide IS NOT NULL GROUP BY c.cit_num HAVING AVG(vot_valeur)=:note";
+	  } else {
+		$sql .= " FROM citation c JOIN vote v on v.cit_num=c.cit_num WHERE c.per_num=:prof GROUP BY c.cit_num HAVING AVG(vot_valeur)=:note";
+	  }
       $requete = $this->db->prepare($sql);
       $requete->bindValue(":note", $note === "zero" ? 0 : floatval($note));
       $requete->bindValue(":prof", $recherche["prof"]);
@@ -107,7 +131,12 @@ class CitationManager {
 
     if (!empty($note) && !empty($recherche["prof"]) && !empty($recherche["date"])) {
       $code = 8;
-      $sql .= " FROM citation c JOIN vote v on v.cit_num=c.cit_num WHERE c.per_num=:prof AND cit_date_depo=:date AND cit_valide=1 AND cit_date_valide IS NOT NULL GROUP BY c.cit_num HAVING AVG(vot_valeur)=:note";
+	  if (!$isAdmin) {
+		$sql .= " FROM citation c JOIN vote v on v.cit_num=c.cit_num WHERE c.per_num=:prof AND cit_date=:date AND cit_valide=1 AND cit_date_valide IS NOT NULL GROUP BY c.cit_num HAVING AVG(vot_valeur)=:note";
+	  } else {
+		$sql .= " FROM citation c JOIN vote v on v.cit_num=c.cit_num WHERE c.per_num=:prof AND cit_date=:date GROUP BY c.cit_num HAVING AVG(vot_valeur)=:note";
+	  }
+      
       $requete = $this->db->prepare($sql);
       $requete->bindValue(":note", $note === "zero" ? 0 : floatval($note));
       $requete->bindValue(":date", getEnglishDate($recherche["date"]));
