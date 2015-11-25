@@ -6,8 +6,13 @@ $citationManager = new CitationManager($pdo);
 
 if (!isConnected()) {
 	$nbCitations = $citationManager->getNbCitations();
+	$nbCitationsCorrecte = $citationManager->getNbCitationsCorrectes();
 	$nbCitationsListees = 2;
 	$tmp = $citationManager->getAllCitations();
+	if ($nbCitationsCorrecte < $nbCitationsListees) {
+		//Dans le cas ou une seule citation a été modérée.
+		$nbCitationsListees = $nbCitationsCorrecte;
+	}
 	for ($i = 0; $i < $nbCitationsListees; $i++) {
 		//On restreint l'affichage pour les personnes connectées.
 		$citations[] = $tmp[$i];
