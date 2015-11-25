@@ -1,17 +1,15 @@
 # Betisier-TP
  
-Ce site est disponible à cette adresse : [Betisier de Sylvain Metayer](http://www.betisier.sylvainmetayer.fr)
-Dépôt pour le rendu du TP Bêtisier - DUT Informatique 2A - IUT du Limousin
+DUT Informatique 2ème Année. Ce site est disponible à l'adresse suivante : [Betisier de Sylvain Metayer](http://www.betisier.sylvainmetayer.fr)
  
  
-## Informations :
+## 1- Informations
 - Les mots interdits doivent être constitué au minimum de 3 lettres, il s'agit d'un réglage MySQL. [Détails ici](http://stackoverflow.com/a/17797003)
 - Le fichier "simulationMail.txt" doit avoir les droits rw-, car des écritures sont faites sur ce fichier.
 - Dans le jeu d'essais initial (script SQL importé), une erreur est présente. En effet, la citation "Tous les 4, vous commencez à me casser les pieds" est validé (cit_valide = 1) mais la date de validation de citation (cit_date_valide) est NULL.
 - Dans le jeu d'essai initial, table citation, une erreur dans la structure de la table est présente. En effet, le "cit_valide" est un "bit(1)" alors qu'il devrait être un "char(1)"
 
-
-## Fonctionnalités demandées
+## 2- Fonctionnalités demandées
 - Conception Objet (Classe, Manager, PDO, ..)
 - Programmation modulaire exigée
 - Gestion des droits d'accès aux différentes fonctionnalités (connexion et droits d'accès)
@@ -23,7 +21,7 @@ Dépôt pour le rendu du TP Bêtisier - DUT Informatique 2A - IUT du Limousin
 - Possiblité pour les élèves de voter pour des citations
 - Le site doit être valide W3C (HTML et CSS)
 
-## Fonctionnalités supplémentaires
+## 3- Fonctionnalités supplémentaires
 
 - Les tableaux sont triables (cliquer sur l'en-tête pour effectuer un tri)
 - Utilisation des exceptions pour contrôler les différentes erreurs possibles
@@ -39,7 +37,7 @@ Dépôt pour le rendu du TP Bêtisier - DUT Informatique 2A - IUT du Limousin
 - Une personne connectée peut changer son mot de passe
 - Test du référencement (Essayez de rechercher "betisier IUT" ou "betisier sylvain metayer" sur Google)
 
-##Mise en service
+## 4-Mise en service
 1. Importer la base "betisier.sql" dans une base de données.
 2. Executer le script "pwd.sql" dans la base de données créée précédemment.
 3. Configurer le fichier "include/config.inc.php" dont le modèle se trouve ci-dessous
