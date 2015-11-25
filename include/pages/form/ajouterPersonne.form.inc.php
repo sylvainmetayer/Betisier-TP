@@ -43,17 +43,15 @@
     </div>
 
     <div class="pure-control-group">
-      <label for="categorie" class="pure-radio">
         Cat&eacute;gorie
-      </label>
 
-      <label for="categorie" class="pure-radio">
-        <input type="radio" name="categorie" value="etudiant" checked>
+      <label for="categorie-1" class="pure-radio">
+        <input type="radio" name="categorie" id="categorie-1" value="etudiant" checked>
         Etudiant
       </label>
 
       <label for="categorie" class="pure-radio">
-        <input type="radio" name="categorie" value="personnel">
+        <input type="radio" id="categorie" name="categorie" value="personnel">
         Personnel
       </label>
     </div>

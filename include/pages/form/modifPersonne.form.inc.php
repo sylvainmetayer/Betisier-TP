@@ -50,18 +50,31 @@
     </div>
 
     <div class="pure-control-group">
-      <label for="categorie" class="pure-radio">Cat&eacute;gorie : </label>
+      Cat&eacute;gorie : 
       <?php if ($personneManager->isEtudiant($personne->getPerNum())) { ?>
-        <input type="radio" name="categorie" value="etudiant" checked>Etudiant
-        <input type="radio" name="categorie" value="personnel">Personnel
+		<label for="categorie-1" class="pure-radio">
+			<input type="radio" name="categorie" id="categorie-1" value="etudiant" checked>
+			Etudiant
+		</label>
+		  <label for="categorie" class="pure-radio">
+			<input type="radio" id="categorie" name="categorie" value="personnel">
+			Personnel
+		  </label>
         <?php } else { ?>
-         <input type="radio" name="categorie" value="etudiant" >Etudiant
-         <input type="radio" name="categorie" value="personnel"checked>Personnel
+         label for="categorie-1" class="pure-radio">
+        <input type="radio" name="categorie" id="categorie-1" value="etudiant">
+        Etudiant
+      </label>
+
+      <label for="categorie" class="pure-radio">
+        <input type="radio" id="categorie" name="categorie" value="personnel" checked>
+        Personnel
+      </label>
         <?php } ?>
       </div>
         </fieldset>
-
   <input type="submit" class="pure-button button-secondary" value="Valider">
+</form>
   <div class="bottomDocument"></div>
 
   <div>
