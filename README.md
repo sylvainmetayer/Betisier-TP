@@ -26,6 +26,7 @@ DUT Informatique 2ème Année. Ce site est disponible à l'adresse suivante : [B
 - Les tableaux sont triables (cliquer sur l'en-tête pour effectuer un tri)
 - Utilisation des exceptions pour contrôler les différentes erreurs possibles
 - Contrôle des numéros de téléphone (composé de 10 chiffres)
+- Contrôle de validité des emails (via la fonction filter_var de php)
 - Changement du titre de la page de façon dynamique (javascript)
 - Affichage aléatoire d'un avatar pour les détails d'une personne
 - Affichage d'une phrase aléatoire lors de l'ajout d'une citation
