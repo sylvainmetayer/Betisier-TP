@@ -46,12 +46,8 @@ Dépôt pour le rendu du TP Bêtisier - DUT Informatique 2A - IUT du Limousin
 4. Configurer le fichier ".htaccess" et ".htpasswd"
 5. S'assurer que les fichiers "ideesCitations.txt" et "simulationMail.txt" existent, et sont situés à la racine du site.
 
-##Structure du fichier include/config.inc.php
-**!! Ne jamais versionner ce fichier, il contient les acces a la base de données !!**
-
-"include/config.inc.php" :
-
-Le grain de sel est utilisé pour générer un hash du mot de passe. Plus il est complexe, plus votre hash sera résistant !
+###Structure des fichiers de configurations
+"include/config.inc.php" : Le grain de sel est utilisé pour générer un hash du mot de passe. Plus il est complexe, plus votre hash sera résistant !
 ```
 define('DBHOST', "");
 define('DBNAME', "");
@@ -61,13 +57,7 @@ define('GRAIN_SEL', "");
 define('ENV','dev'); //env ou prod
 ```
 
-".htaccess"
-
-Ce fichier permet de restreindre l'acces au site, selon des regles etablies.
-Le chemin est a adapter selon l'emplacement de votre projet.
-
-*NB : Un .htaccess est recursif*
-
+".htaccess" : Ce fichier permet de restreindre l'acces au site, selon des regles etablies. Le chemin est a adapter selon l'emplacement de votre projet.
 ```
 #On interdit le listage des repertoires
 Options -Indexes
@@ -99,11 +89,6 @@ Order Allow,Deny
 Deny from all
 </Files>
 
-<Files "forbiddenPwd.pwd">
-Order Allow,Deny
-Deny from all
-</Files>
-
 <Files "betisier.sql">
 Order Allow,Deny
 Deny from all
@@ -115,14 +100,7 @@ Deny from all
 </Files>
 ```
 
-".htpasswd"
-
-**!! Ne jamais versionner ce fichier !!**
-
-Ce fichier contient la liste des utilisateurs autorisés. Sa structure est la suivante:
-
+".htpasswd" :Ce fichier contient la liste des utilisateurs autorisés.
 ```
 user:pwdCrytpe
 ```
-
-*Attention ! Sous linux, le mot de passe doit etre crypte, mais sous windows, il doit etre affiché en clair !!*
