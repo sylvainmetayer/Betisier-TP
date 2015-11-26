@@ -182,7 +182,7 @@ body{
 	border-top:solid #11768C 3px;
 	padding-top:20px;
 	bottom:0px;
-	position:relative;
+	/*position:relative;*/
 	color:white;
 	font-size:12px;
 	text-align:center;
