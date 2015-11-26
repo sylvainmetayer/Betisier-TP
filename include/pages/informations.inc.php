@@ -49,6 +49,7 @@
   Vous êtes actuellement sur le serveur  <?php echo $_SERVER["SERVER_NAME"]." (".$_SERVER["SERVER_ADDR"].":".$_SERVER["SERVER_PORT"].")"; ?>
 </p>
 
+<p>Ci-dessous, affichage du README, à l'aide de Parsedown, du dépôt GitHub. </p>
 <?php
   $parsedown = new Parsedown();
   $file = lireFichier("README.md");
