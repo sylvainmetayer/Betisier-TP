@@ -1,12 +1,11 @@
 # Betisier-TP
 
-DUT Informatique 2ème Année. Ce site est disponible à l'adresse suivante : [Betisier de Sylvain Metayer](http://www.betisier.sylvainmetayer.fr)
-
+DUT Informatique 2ème Année. Ce site est disponible à l'adresse suivante : [Betisier de Sylvain Metayer](http://www.betisier.sylvainmetayer.fr). 
 
 ## 1- Informations
 - Les mots interdits doivent être constitué au minimum de 3 lettres, il s'agit d'un réglage MySQL. [Détails ici](http://stackoverflow.com/a/17797003)
 - Le fichier "simulationMail.txt" doit avoir les droits rw-, car des écritures sont faites sur ce fichier.
-- Dans le jeu d'essais initial (script SQL importé), une erreur est présente. En effet, la citation "Tous les 4, vous commencez à me casser les pieds" est validé (cit_valide = 1) mais la date de validation de citation (cit_date_valide) est NULL.
+- Dans le jeu d'essais initial (script SQL importé), une erreur est présente. En effet, la citation "Tous les 4, vous commencez à me casser les pieds !" est validée (cit_valide = 1) mais la date de validation de citation (cit_date_valide) est NULL.
 - Dans le jeu d'essai initial, table citation, une erreur dans la structure de la table est présente. En effet, le "cit_valide" est un "bit(1)" alors qu'il devrait être un "char(1)"
 
 ## 2- Fonctionnalités demandées
@@ -23,7 +22,7 @@ DUT Informatique 2ème Année. Ce site est disponible à l'adresse suivante : [B
 
 ## 3- Fonctionnalités supplémentaires
 
-- Les tableaux sont triables (cliquer sur l'en-tête pour effectuer un tri)
+- Tableaux triables (cliquez sur l'en-tête pour effectuer un tri)
 - Utilisation des exceptions pour contrôler les différentes erreurs possibles
 - Contrôle des numéros de téléphone (composé de 10 chiffres)
 - Contrôle de validité des emails (via la fonction filter_var de php)
@@ -32,15 +31,16 @@ DUT Informatique 2ème Année. Ce site est disponible à l'adresse suivante : [B
 - Affichage d'une phrase aléatoire lors de l'ajout d'une citation
 - Il est possible de saisir les dates à l'aide d'un calendrier (jquery)
 - Salutation personnalisée selon l'heure (revenez à différentes heures, et vous verrez !)
-- Simulation d'un formulaire de contact, avec écriture de la demande dans un fichier texte (SMTP indisponible, donc pas d'envoi de mail possible)
+- Simulation d'un formulaire de contact, avec écriture de la demande dans un fichier texte (SMTP indisponible sur le serveur de rendu du TP, donc pas d'envoi de mail possible)
 - Gestion des mots interdits (ajout/suppression/modification)
 - Lors de l'inscription, interdiction d'utiliser un mot de passe trop simple ([Plus d'informations ici](http://www.businessinsider.com/twitters-list-of-370-banned-passwords-2009-12))
 - Une personne connectée peut changer son mot de passe
 - Test du référencement (Essayez de rechercher "betisier IUT" ou "betisier sylvain metayer" sur Google)
-- On masque les données "sensibles" (détails personnes) aux utilisateurs non connectés
+- On masque les données "sensibles" (détails d'une personne) aux utilisateurs non connectés
 
-## 4-Mise en service
-1. Importer la base "betisier.sql" dans une base de données.
+## 4- Mise en service
+1. Cloner le dépôt [Betisier](https://github.com/sylvainmetayer/Betisier-TP)
+2. Importer la script "betisier.sql" dans une base de données.
 2. Executer le script "pwd.sql" dans la base de données créée précédemment.
 3. Configurer le fichier "include/config.inc.php" dont le modèle se trouve ci-dessous
 4. Configurer le fichier ".htaccess" et ".htpasswd"
@@ -57,18 +57,18 @@ define('GRAIN_SEL', "");
 define('ENV','dev'); //env ou prod
 ```
 
-".htaccess" : Ce fichier permet de restreindre l'acces au site, selon des regles etablies. Le chemin est a adapter selon l'emplacement de votre projet.
+".htaccess" : Ce fichier permet de restreindre l'accès au site, selon des règles établies. Le chemin est à adapter, mais doit être absolu. 
 ```
-#On interdit le listage des repertoires
+#On interdit le listage des répertoires
 Options -Indexes
 
-#On interdit l'acces au fichier a toutes personnes
+#On interdit l'acces au fichier à tous
 <Files "ideesCitations.txt">
 Order Allow,Deny
 Deny from all
 </Files>
 
-#On autorise l'acces aux personnes authentifées à l'aide du .htpasswd
+#On autorise l'accès aux personnes authentifées à l'aide du .htpasswd
 <Files "simulationMail.txt">
 AuthUserFile <chemin vers votre projet>/.htpasswd
 AuthName "Repertoire a  acces reserve"
@@ -100,7 +100,7 @@ Deny from all
 </Files>
 ```
 
-".htpasswd" :Ce fichier contient la liste des utilisateurs autorisés.
+".htpasswd" : Ce fichier contient la liste des utilisateurs autorisés.
 ```
 user:pwdCrytpe
 ```
