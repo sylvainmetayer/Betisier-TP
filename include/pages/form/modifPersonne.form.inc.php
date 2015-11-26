@@ -50,7 +50,7 @@
     </div>
 
     <div class="pure-control-group">
-      Cat&eacute;gorie : 
+      Cat&eacute;gorie :
       <?php if ($personneManager->isEtudiant($personne->getPerNum())) { ?>
 		<label for="categorie-1" class="pure-radio">
 			<input type="radio" name="categorie" id="categorie-1" value="etudiant" checked>
@@ -61,7 +61,7 @@
 			Personnel
 		  </label>
         <?php } else { ?>
-         label for="categorie-1" class="pure-radio">
+      <label for="categorie-1" class="pure-radio">
         <input type="radio" name="categorie" id="categorie-1" value="etudiant">
         Etudiant
       </label>
