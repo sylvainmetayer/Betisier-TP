@@ -50,7 +50,8 @@ if (intval($version[0]) < 5 || intval($version[1]) < 5) {
 
 <p>
   Identifiant élève : Paul / Mot de passe : IUT <br/>
-  Identifiant prof : Bob / Mot de passe : IUT
+  Identifiant prof : Bob / Mot de passe : IUT <br/>
+  Identifiant admin : root / Mot de passe : root <br/>
 </p>
 
 <img class="centreImage" src="image/logo.gif" alt="Betisier IUT" title="Betisier IUT Limousin"/>
