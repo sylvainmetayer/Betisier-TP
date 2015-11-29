@@ -1,7 +1,7 @@
 <?php
 
 if (!isConnected() || !is_numeric($_GET['id']) || $_GET['id'] != getPersonneConnectee()->getPerNum()) {
-  throw new ExceptionPerso("Vous semblez astucieux, mais à malin, malin et demi ! <br/>Vous n'avez pas les droits pour afficher cette page !", ExceptionPerso::ERR_DROITS);
+  throw new ExceptionPerso("Bien tenté, mais vous n'avez pas les droits pour afficher cette page !", ExceptionPerso::ERR_DROITS);
 }
 
 ?> <h1> Changement de votre mot de passe </h1> <?php

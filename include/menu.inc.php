@@ -41,7 +41,7 @@
 
 				//Si ce n'est pas un étudiant, et que c'est un admin.
 				if(isConnected() && getPersonneConnectee()->isPerAdmin()) {
-					genererItemsMenu("Lister mots interdits", LISTER_MOTS_INTERDITS);
+					genererItemsMenu("Lister les mots interdits", LISTER_MOTS_INTERDITS);
 					genererItemsMenu("Ajouter un mot interdit", AJOUTER_MOT_INTERDIT);
 				}
 				?>
@@ -64,6 +64,14 @@
 				<img class = "icone" src="image/mail.gif" alt="Contact"/> Contact
 			</a>
 		</span>
+
+		<ul class="pure-menu-list">
+			<?php
+				if (isConnected() && getPersonneConnectee()->isPerAdmin()) {
+					genererItemsMenu("Voir les messages reçus", LISTER_MESSAGES);
+				}
+			?>
+		</ul>
 
 		<span class="pure-menu-heading">
 			<a href="index.php?page=<?php echo INFORMATIONS; ?>">

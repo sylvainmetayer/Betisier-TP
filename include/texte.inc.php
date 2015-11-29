@@ -91,6 +91,9 @@ try {
 				case CONTACT:
 					include('pages/contact.inc.php');
 					break;
+				case LISTER_MESSAGES:
+					include("pages/listerMessage.inc.php");
+					break;
 
 				/*ERREUR 404*/
 				default :

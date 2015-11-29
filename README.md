@@ -1,6 +1,6 @@
 # Betisier-TP
 
-DUT Informatique 2ème Année. Ce site est disponible à l'adresse suivante : [Betisier de Sylvain Metayer](http://www.betisier.sylvainmetayer.fr). 
+DUT Informatique 2ème Année. Ce site est disponible à l'adresse suivante : [Betisier de Sylvain Metayer](http://www.betisier.sylvainmetayer.fr).
 
 ## 1- Informations
 - Les mots interdits doivent être constitué au minimum de 3 lettres, il s'agit d'un réglage MySQL. [Détails ici](http://stackoverflow.com/a/17797003)
@@ -32,6 +32,7 @@ DUT Informatique 2ème Année. Ce site est disponible à l'adresse suivante : [B
 - Il est possible de saisir les dates à l'aide d'un calendrier (jquery)
 - Salutation personnalisée selon l'heure (revenez à différentes heures, et vous verrez !)
 - Simulation d'un formulaire de contact, avec écriture de la demande dans un fichier texte (SMTP indisponible sur le serveur de rendu du TP, donc pas d'envoi de mail possible)
+- Affichage pour l'admin des messages reçus, avec affichage en Markdown
 - Gestion des mots interdits (ajout/suppression/modification)
 - Lors de l'inscription, interdiction d'utiliser un mot de passe trop simple ([Plus d'informations ici](http://www.businessinsider.com/twitters-list-of-370-banned-passwords-2009-12))
 - Une personne connectée peut changer son mot de passe
@@ -57,7 +58,7 @@ define('GRAIN_SEL', "");
 define('ENV','dev'); //env ou prod
 ```
 
-".htaccess" : Ce fichier permet de restreindre l'accès au site, selon des règles établies. Le chemin est à adapter, mais doit être absolu. 
+".htaccess" : Ce fichier permet de restreindre l'accès au site, selon des règles établies. Le chemin est à adapter, mais doit être absolu.
 ```
 #On interdit le listage des répertoires
 Options -Indexes

@@ -12,10 +12,10 @@
 
   $date = date("d/m/Y H:i");
   $sujet = (empty($_POST["sujet"])) ? "Pas de sujet précisé" : $_POST["sujet"];
-  $message_txt = "\n\nNouveau message de ".$_POST["nom"]." ".$_POST["prenom"]." le $date.\n";
-  $message_txt .= "Sujet : ".$sujet."\n";
-  $message_txt .= "Contenu de la demande de contact : "."\n".$_POST["message"]."\n";
-  $message_txt .= "Adresse de réponse : ".$_POST["mail"]."\n";
+  $message_txt = "\n\n##Nouveau message de ".$_POST["nom"]." ".$_POST["prenom"]." le $date.\n";
+  $message_txt .= "Sujet : ".$sujet."\n\n";
+  $message_txt .= "**Contenu du message :** "."\n\n".$_POST["message"]."\n\n";
+  $message_txt .= "Adresse de réponse : [".$_POST["mail"]."](mailto:".$_POST["mail"].")\n\n----------";
 
   ecrireDans(SIMUL_MAIL, $message_txt);
 

@@ -40,6 +40,7 @@
     <textarea name="message" id="message" rows="8" cols="40" required></textarea>
   </div>
 
+  <i>Markdown autorisé</i><br/><br/>
   <input type="submit" class="pure-button button-secondary" value="Valider">
 </form>
 <div class="bottomDocument"> </div>

@@ -1,7 +1,7 @@
 <?php
 define('NOM_LECTURE_FICHIER', "ideesCitations.txt");
 //define('PWD_INTERDIT', "forbiddenPwd.pwd"); Obselete
-define('SIMUL_MAIL', "simulationMail.txt");
+define('SIMUL_MAIL', "simulationMail.md");
 
 /*
 Définitions personnelles
@@ -37,4 +37,5 @@ define('DECONNEXION', 15);
 
 define('INFORMATIONS', 24);
 define("CONTACT", 25);
+define("LISTER_MESSAGES", 27);
 ?>
