@@ -2,6 +2,11 @@
 <h1>Rechercher une citation </h1>
 
 <?php
+
+if (!isConnected()) {
+  throw new ExceptionPerso("Vous n'avez pas les droits pour afficher cette page ", ExceptionPerso::ERR_DROITS);
+
+}
 $pdo = new Mypdo();
 //1- Afficher select avec prof, un champ note optionnel et une date optionnel
 //wrapperl e tout dans un arary et balancer ca a $citationManager->search($array)
@@ -28,9 +33,9 @@ if (empty($_POST)) {
   //var_dump($recherche);
 
   $citationManager = new CitationManager($pdo);
-  
+
   //var_dump(getPersonneConnectee()->isPerAdmin());
-  
+
   if (!isConnected() || !getPersonneConnectee()->isPerAdmin()) {
 	  $isAdmin = 0;
   } else {

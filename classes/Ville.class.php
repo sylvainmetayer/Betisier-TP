@@ -27,6 +27,7 @@ class Ville {
   }
 
   public function setVilleNom($vil_nom) {
+		$vil_nom = removeJavascript($vil_nom);
 		if (empty($vil_nom)) {
 			throw new ExceptionPerso("Le nom d'une ville ne peut être vide !", ExceptionPerso::ERR_VILLE);
 		}

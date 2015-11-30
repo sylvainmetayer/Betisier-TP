@@ -14,6 +14,11 @@
 		fclose($file);
 	}
 
+	/*Retire le javascript d'une phrase*/
+	function removeJavascript($string) {
+		return preg_replace('@<script[^>]*?>.*?</script>@si', '', $string);
+	}
+
 	/*
   Cette fonction permet de savoir si un numero de telephone contient bien 10 chiffres
   */

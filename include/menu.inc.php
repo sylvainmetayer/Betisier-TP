@@ -37,7 +37,9 @@
 					genererItemsMenu("Lister", LISTER_CITATIONS);
 				}
 
-				genererItemsMenu("Rechercher", RECHERCHER_CITATIONS);
+				if (isConnected()) {
+					genererItemsMenu("Rechercher", RECHERCHER_CITATIONS);
+				}
 
 				//Si ce n'est pas un étudiant, et que c'est un admin.
 				if(isConnected() && getPersonneConnectee()->isPerAdmin()) {

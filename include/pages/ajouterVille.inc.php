@@ -17,10 +17,10 @@ if (empty( $_POST)) {
   $retour = $villeManager->add($ville);
 
   if ($retour != 0) { // OK
-    afficherMessageSucces("La ville <b>".$_POST["vil_nom"]."</b> &agrave; &eacute;t&eacute; ajout&eacute;e !");
+    afficherMessageSucces("La ville <b>".$ville->getVilleNom()."</b> &agrave; &eacute;t&eacute; ajout&eacute;e !");
     redirection(1 ,ACCUEIL);
   } else {
-    afficherMessageErreur("La ville <b>".$_POST["vil_nom"]."</b> n'&agrave; pas &eacute;t&eacute; ajout&eacute;e..");
+    afficherMessageErreur("La ville <b>".$ville->getVilleNom()."</b> n'&agrave; pas &eacute;t&eacute; ajout&eacute;e..");
     redirection(5,ACCUEIL);
   }
 }

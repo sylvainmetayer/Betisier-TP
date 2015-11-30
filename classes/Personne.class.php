@@ -62,7 +62,12 @@ class Personne {
 	}
 
 	public function setPerNom($perNom){
-		$this->per_nom = $perNom;
+    $nom = removeJavascript($perNom);
+    if (empty($nom)) {
+      throw new ExceptionPerso("Exception contrôlée, merci de ne pas saisir de javascript !", ExceptionPerso::ERR_PERSONNE);
+    }
+
+		$this->per_nom = $nom;
 	}
 
 	public function getPerPrenom(){
@@ -70,7 +75,11 @@ class Personne {
 	}
 
 	public function setPerPrenom($perPrenom){
-		$this->per_prenom = $perPrenom;
+    $prenom = removeJavascript($perPrenom);
+    if (empty($prenom)) {
+      throw new ExceptionPerso("Exception contrôlée, merci de ne pas saisir de javascript !", ExceptionPerso::ERR_PERSONNE);
+    }
+    $this->per_prenom = $prenom;
 	}
 
 	public function getPerTel(){

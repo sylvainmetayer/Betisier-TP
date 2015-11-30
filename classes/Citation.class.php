@@ -132,11 +132,12 @@ class Citation {
 	}
 
 	public function setCitationLibelle($valeur) {
-		if (empty($valeur)) {
+		$libelle = removeJavascript($valeur);
+		if (empty($libelle)) {
 			throw new ExceptionPerso("Le contenu de la blague ne peut-être vide !", ExceptionPerso::ERR_CITATION);
 		}
 
-		$this->cit_libelle = $valeur;
+		$this->cit_libelle = $libelle;
 	}
 
 	public function getCitationLibelle() {
