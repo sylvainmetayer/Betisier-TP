@@ -15,6 +15,7 @@ class ExceptionPerso extends Exception {
   const ERR_PERSONNE = 14;
   const ERR_CITATION = 15;
   const ERR_MOT = 16;
+  const ERR_CONTACT = 17;
 
   private $throwFrom = NULL;
   private $afficherChemin = true;
@@ -29,6 +30,9 @@ class ExceptionPerso extends Exception {
   {
     $message = "Type d'erreur : ";
     switch ($this->code) {
+      case self::ERR_CONTACT:
+        $message .= "Erreur lors du remplissage du formulaire de contact.";
+        break;
       case self::ERR_MOT:
         $message .= "Erreur lors d'une opération sur un mot interdit.";
         break;
