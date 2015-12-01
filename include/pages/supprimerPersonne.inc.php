@@ -17,13 +17,12 @@ if (empty($_GET['id'])) {
 	}
 
 	$retour = $personneManager->deleteByPerNum($pernum);
-
 	if ($retour === true) {
 		afficherMessageSucces("Personne supprimée !");
 		redirection(1, LISTER_PERSONNES	);
 	} else {
-			afficherMessageErreur("La personne n'a pas pu être supprimée.");
-			redirection(20, LISTER_PERSONNES);
+		afficherMessageErreur("La personne n'a pas pu être supprimée.");
+		redirection(20, LISTER_PERSONNES);
 	}
 
 	if ($pernum === getPersonneConnectee()->getPerNum()) {

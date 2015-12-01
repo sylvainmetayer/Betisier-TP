@@ -8,10 +8,6 @@ if (!isConnected()) {
 
 }
 $pdo = new Mypdo();
-//1- Afficher select avec prof, un champ note optionnel et une date optionnel
-//wrapperl e tout dans un arary et balancer ca a $citationManager->search($array)
-//si array vide, on affiche message  Directory
-//Affiche resultat
 if (empty($_POST)) {
   include("include/pages/form/rechercherCitation.form.inc.php");
 } else {
@@ -30,11 +26,7 @@ if (empty($_POST)) {
     'date' => $date
   );
 
-  //var_dump($recherche);
-
   $citationManager = new CitationManager($pdo);
-
-  //var_dump(getPersonneConnectee()->isPerAdmin());
 
   if (!isConnected() || !getPersonneConnectee()->isPerAdmin()) {
 	  $isAdmin = 0;

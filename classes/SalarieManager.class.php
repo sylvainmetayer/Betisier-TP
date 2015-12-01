@@ -53,7 +53,14 @@ class SalarieManager extends PersonneManager {
   }
 
   public function delete($per_num) {
-    return parent::deleteByPerNum($per_num);
+    $sql = "DELETE FROM salarie WHERE per_num=:per_num";
+
+    $requete = $this->db->prepare($sql);
+    $requete->bindValue("per_num", $per_num);
+
+    $retour = $requete->execute();
+
+    return $retour;
   }
 
   /*

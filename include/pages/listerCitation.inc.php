@@ -30,7 +30,6 @@ if (isConnected() && getPersonneConnectee()->isPerAdmin()) {
 	$nbCitations = count($citations);
 }
 
-//var_dump($citations);
 $personneManager = new PersonneManager($pdo);
 $voteManager = new VoteManager($pdo);
 if (intval($nbCitations) === 0) {

@@ -29,18 +29,15 @@ class CitationManager {
   /*
   Permet d'effectuer une recherche avec un tableau passé en paramètre, contenant une note, une date et un prof. Les données peuvent-être vide.
   Le $code dans les if est uniquement utilisé à des fins de test.
-  
+
   */
   public function search($recherche, $isAdmin) {
-	//var_dump(getEnglishDate($recherche['date']));
-	
-	
 	if (!$isAdmin) {
 		$hide = " AND cit_valide = 1 AND cit_date_valide IS NOT NULL";
 	} else {
 		$hide = "";
 	}
-	
+
     $sql = "SELECT c.cit_num, c.per_num, per_num_etu, per_num_valide, cit_libelle, cit_date, cit_date_depo, cit_date_valide, cit_valide ";
 
     /*
@@ -97,9 +94,9 @@ class CitationManager {
     if (!empty($note) && empty($recherche["prof"]) && empty($recherche["date"])) {
       $code = 5;
 	  if (!$isAdmin) {
-		$sql .= " FROM citation c JOIN vote v ON c.cit_num=v.cit_num WHERE cit_valide=1 AND cit_date_valide IS NOT NULL GROUP BY c.cit_num HAVING AVG(vot_valeur)=:note";  
+		$sql .= " FROM citation c JOIN vote v ON c.cit_num=v.cit_num WHERE cit_valide=1 AND cit_date_valide IS NOT NULL GROUP BY c.cit_num HAVING AVG(vot_valeur)=:note";
 	  } else {
-		$sql .= " FROM citation c JOIN vote v ON c.cit_num=v.cit_num GROUP BY c.cit_num HAVING AVG(vot_valeur)=:note";  
+		$sql .= " FROM citation c JOIN vote v ON c.cit_num=v.cit_num GROUP BY c.cit_num HAVING AVG(vot_valeur)=:note";
 	  }
       $requete = $this->db->prepare($sql);
       $requete->bindValue(":note", $note === "zero" ? 0 : floatval($note));
@@ -108,7 +105,7 @@ class CitationManager {
     if (!empty($note) && empty($recherche["prof"]) && !empty($recherche["date"])) {
       $code = 6;
 	  if (!$isAdmin) {
-		$sql .= " FROM citation c JOIN vote v on v.cit_num=c.cit_num WHERE cit_date=:date AND cit_valide=1 AND cit_date_valide IS NOT NULL GROUP BY c.cit_num HAVING AVG(vot_valeur)=:note";   
+		$sql .= " FROM citation c JOIN vote v on v.cit_num=c.cit_num WHERE cit_date=:date AND cit_valide=1 AND cit_date_valide IS NOT NULL GROUP BY c.cit_num HAVING AVG(vot_valeur)=:note";
 	  } else {
 		$sql .= " FROM citation c JOIN vote v on v.cit_num=c.cit_num WHERE cit_date=:date GROUP BY c.cit_num HAVING AVG(vot_valeur)=:note";
 	  }
@@ -136,7 +133,7 @@ class CitationManager {
 	  } else {
 		$sql .= " FROM citation c JOIN vote v on v.cit_num=c.cit_num WHERE c.per_num=:prof AND cit_date=:date GROUP BY c.cit_num HAVING AVG(vot_valeur)=:note";
 	  }
-      
+
       $requete = $this->db->prepare($sql);
       $requete->bindValue(":note", $note === "zero" ? 0 : floatval($note));
       $requete->bindValue(":date", getEnglishDate($recherche["date"]));
@@ -165,6 +162,18 @@ class CitationManager {
     $requete = $this->db->prepare($sql);
 
     $requete->bindValue(":cit_num", $cit_num);
+
+    $retour = $requete->execute();
+    return $retour;
+  }
+
+  public function deleteByPerNum($per_num) {
+    $sql = "DELETE from vote WHERE cit_num IN (SELECT c.cit_num FROM citation c WHERE per_num_etu = :per_num);
+            DELETE FROM vote WHERE per_num=:per_num;
+            DELETE FROM citation WHERE per_num=:per_num OR per_num_etu=:per_num OR per_num_valide=:per_num; ";
+
+    $requete = $this->db->prepare($sql);
+    $requete->bindValue(":per_num", $per_num);
 
     $retour = $requete->execute();
     return $retour;
@@ -244,7 +253,6 @@ class CitationManager {
     $requete->execute();
 
     $retour = $requete->fetch(PDO::FETCH_ASSOC);
-    //var_dump($retour);
     return $retour['nbCitation'];
   }
 
@@ -259,8 +267,54 @@ class CitationManager {
       $listeCitations[] = new Citation($citation);
     }
     $requete->closeCursor();
-    //var_dump($listeCitations);
     return $listeCitations;
+  }
+
+  /*Pour un eleve donnée, retourne les citation a supprimer*/
+  public function getCitationToDeleteForStudent($per_num) {
+    $sql = "SELECT cit_num,per_num,per_num_valide,per_num_etu,cit_libelle,cit_date,cit_valide,cit_date_valide,cit_date_depo FROM citation WHERE per_num_etu=:per_num OR per_num=:per_num OR per_num_valide=:per_num";
+    //Normalement, on devrait juste mettre per_num_etu, mais étant donné qu'il y a sophie delmas, on est obligé d'ajouter les deux autres.
+    $requete = $this->db->prepare($sql);
+    $requete->bindValue(":per_num", $per_num);
+    $requete->execute();
+
+    while ($citation = $requete->fetch(PDO::FETCH_OBJ)) {
+      $listeCitations[] = new Citation($citation);
+    }
+    $requete->closeCursor();
+    if (isset($listeCitations)) {
+      return $listeCitations;
+    }
+    return null;
+
+  }
+
+  /*Pour un prof donnée, retourne les citation à supprimer.*/
+  public function getCitationToDeleteForProf($per_num) {
+    $sql = "SELECT cit_num,per_num,per_num_valide,per_num_etu,cit_libelle,cit_date,cit_valide,cit_date_valide,cit_date_depo FROM citation WHERE per_num=:per_num OR per_num_valide=:per_num";
+    $requete = $this->db->prepare($sql);
+    $requete->bindValue(":per_num", $per_num);
+    $requete->execute();
+
+    while ($citation = $requete->fetch(PDO::FETCH_OBJ)) {
+      $listeCitations[] = new Citation($citation);
+    }
+    $requete->closeCursor();
+    if (isset($listeCitations)) {
+      return $listeCitations;
+    }
+    return null;
+
+  }
+
+  public function deleteCitationByCitNum($cit_num) {
+    $sql = "DELETE FROM citation WHERE cit_num=:cit_num";
+
+    $requete = $this->db->prepare($sql);
+    $requete->bindValue(":cit_num", $cit_num);
+
+    $retour = $requete->execute();
+    return $retour;
   }
 
   /* Cette fonction permet de savoir le nombre de citations présentes dans la base de données.
@@ -274,7 +328,6 @@ class CitationManager {
     $requete->execute();
 
     $retour = $requete->fetch(PDO::FETCH_ASSOC);
-    //var_dump($retour);
     return $retour['nbCitation'];
   }
 

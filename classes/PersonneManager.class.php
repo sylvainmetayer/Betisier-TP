@@ -95,20 +95,55 @@ class PersonneManager {
 
   /*Permet de supprimer toutes référence à une personne et la supprime*/
   public function deleteByPerNum($per_num) {
-    $sql="DELETE FROM vote WHERE cit_num IN (SELECT cit_num FROM citation WHERE per_num=:per_num);
-          DELETE FROM vote WHERE per_num=:per_num;
-		      DELETE FROM etudiant WHERE per_num=:per_num;
-          DELETE FROM salarie WHERE per_num=:per_num;
-          DELETE FROM citation WHERE per_num=:per_num;
-          DELETE FROM citation WHERE per_num_etu=:per_num;
-          DELETE FROM citation WHERE per_num_valide=:per_num;
-          DELETE FROM personne WHERE per_num=:per_num;";
+    $voteManager = new VoteManager($this->db);
+    $citationManager = new CitationManager($this->db);
+    $personneManager = new PersonneManager($this->db);
 
-		$requete = $this->db->prepare($sql);
+    $listeVoteDeLaPersonne = $voteManager->getVoteByPerNum($per_num);
 
-		$requete->bindValue(':per_num', $per_num);
+    if ($personneManager->isEtudiant($per_num)) {
+      $listeCitationDeLaPersonne = $citationManager->getCitationToDeleteForStudent($per_num);
+      if (isset($listeCitationDeLaPersonne)) {
+        foreach ($listeCitationDeLaPersonne as $citation) {
+          $voteManager->deleteVoteByCitNum($citation->getCitationNum());
+        }
+      }
+    } else {
+      $listeCitationDeLaPersonne = $citationManager->getCitationToDeleteForProf($per_num);
+      if (isset($listeCitationDeLaPersonne)) {
+        foreach ($listeCitationDeLaPersonne as $citation) {
+          $voteManager->deleteVoteByCitNum($citation->getCitationNum());
+        }
+      }
 
-		$retour = $requete->execute();
+    }
+
+    if (isset($listeVoteDeLaPersonne)) {
+      foreach ($listeVoteDeLaPersonne as $vote) {
+        $voteManager->deleteVoteByPerNum($vote->getPerNum());
+      }
+    }
+
+    if (isset($listeCitationDeLaPersonne)) {
+      foreach ($listeCitationDeLaPersonne as $citation) {
+        $citationManager->deleteCitationByCitNum($citation->getCitationNum());
+      }
+    }
+
+
+    if ($personneManager->isEtudiant($per_num)) {
+      $etudiantManager = new EtudiantManager($this->db);
+      $retour = $etudiantManager->delete($per_num);
+    } else {
+      $salarieManager = new SalarieManager($this->db);
+      $retour = $salarieManager->delete($per_num);
+    }
+
+    $sql="DELETE FROM personne WHERE per_num=:per_num;";
+    $requete = $this->db->prepare($sql);
+    $requete->bindValue(':per_num', $per_num);
+    $retour = $requete->execute();
+
     return $retour;
 	}
 

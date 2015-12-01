@@ -64,5 +64,46 @@ class VoteManager {
       $requete->closeCursor();
       return $retour;
   }
+
+  public function deleteVoteByPerNum($per_num) {
+    $sql = "DELETE FROM vote WHERE per_num=:per_num";
+
+    $requete = $this->db->prepare($sql);
+
+    $requete->bindValue("per_num", $per_num);
+
+    $retour = $requete->execute();
+    return $retour;
+  }
+
+  public function deleteVoteByCitNum($cit_num) {
+    $sql = "DELETE FROM vote WHERE cit_num=:cit_num";
+
+    $requete = $this->db->prepare($sql);
+
+    $requete->bindValue("cit_num", $cit_num);
+
+    $retour = $requete->execute();
+    return $retour;
+  }
+
+  public function getVoteByPerNum($per_num) {
+    $sql = "SELECT cit_num, per_num, vot_valeur FROM vote WHERE per_num=:per_num";
+
+    $requete = $this->db->prepare($sql);
+    $requete->bindValue(":per_num", $per_num);
+
+    $retour = $requete->execute();
+
+    while ($vote = $requete->fetch(PDO::FETCH_OBJ)) {
+      $listeVote[] = new Vote($vote);
+    }
+
+    $requete->closeCursor();
+    if (!isset($listeVote)) {
+      return null;
+    }
+    return $listeVote;
+  }
 }
 ?>

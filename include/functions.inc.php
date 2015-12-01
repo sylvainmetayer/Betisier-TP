@@ -2,7 +2,6 @@
 
 	/*Cette fonction retourne la date anglaise d'une date francaise*/
 	function getEnglishDate($date){
-		//var_dump($date);
 		$membres = explode('/', $date);
 		$date = $membres[2].'-'.$membres[1].'-'.$membres[0];
 		return $date;

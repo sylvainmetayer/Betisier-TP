@@ -52,7 +52,7 @@
 <p>Ci-dessous, affichage du README, à l'aide de Parsedown, du dépôt <a href="https://github.com/sylvainmetayer/Betisier-TP" title="Lien vers le dépôt GitHub">GitHub</a>. </p>
 <?php
   $parsedown = new Parsedown();
-  $file = lireFichier("README.md");
+  $file = lireFichier(README);
   $implode = implode($file);
   echo $parsedown->text($implode);
 ?>

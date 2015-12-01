@@ -65,17 +65,71 @@ class VilleManager {
   }
 
   public function delete($vil_num) {
-    if ($this->isVilleNumDejaUtilise($vil_num)) {
-      throw new ExceptionPerso("La ville est déjà utilisée, merci de supprimer les étudiants appartenant à cette ville d'abord !", ExceptionPerso::ERR_VILLE);
+
+    $listePerNum = $this->getListeEtudiantInVille($vil_num);
+    $listeDepNum = $this->getListeDepartementInVille($vil_num);
+
+    if (isset($listePerNum) && !is_null($listePerNum)) {
+      $personneManager = new PersonneManager($this->db);
+      foreach ($listePerNum as $key => $value) {
+        $personneManager->deleteByPerNum($value);
+      }
     }
 
-    $sql = "DELETE FROM departement WHERE vil_num=:ville; DELETE FROM ville WHERE vil_num=:ville";
-    $requete = $this->db->prepare($sql);
+    if (isset($listeDepNum) && !is_null($listeDepNum)) {
+      $departementManager = new DepartementManager($this->db);
+      foreach ($listeDepNum as $cle => $valeur) {
+        $departementManager->delete($valeur);
+      }
+    }
 
-    $requete->bindValue(":ville", $vil_num);
+    $sql = "DELETE FROM ville WHERE vil_num=:vil_num";
+
+    $requete = $this->db->prepare($sql);
+    $requete->bindValue("vil_num", $vil_num);
 
     $retour = $requete->execute();
     return $retour;
+  }
+
+  /*Fonction utilisée pour la suppression de villes, afin de savoir les étudiants dépendants.*/
+  public function getListeEtudiantInVille($vil_num) {
+    $sql = "SELECT per_num FROM etudiant e JOIN departement d on d.dep_num=e.dep_num JOIN ville v on v.vil_num=d.vil_num WHERE v.vil_num=:vil_num";
+
+    $requete = $this->db->prepare($sql);
+
+    $requete->bindValue("vil_num", $vil_num);
+
+    $requete->execute();
+
+    while ($pernum = $requete->fetch(PDO::FETCH_ASSOC)) {
+      $listePerNum[] = $pernum["per_num"];
+    }
+    $requete->closeCursor();
+    if (!isset($listePerNum) || is_null($listePerNum)) {
+      return null;
+    }
+    return $listePerNum;
+  }
+
+  /*Retourne la liste des departement concerne par la suppression d'une ville*/
+  public function getListeDepartementInVille($vil_num) {
+    $sql = "SELECT d.dep_num FROM departement d WHERE vil_num=:vil_num";
+
+    $requete = $this->db->prepare($sql);
+
+    $requete->bindValue("vil_num", $vil_num);
+
+    $requete->execute();
+
+    while ($depnum = $requete->fetch(PDO::FETCH_ASSOC)) {
+      $listeDepNum[] = $depnum["dep_num"];
+    }
+    $requete->closeCursor();
+    if (!isset($listeDepNum) || is_null($listeDepNum)) {
+      return null;
+    }
+    return $listeDepNum;
   }
 
   /*
@@ -98,6 +152,23 @@ class VilleManager {
 			return false;
 		}
 	}
+
+  public function isExistanteVilleById($vil_num) {
+    $sql = "SELECT vil_num, vil_nom FROM ville WHERE vil_num=:vil_num ";
+    $requete = $this->db->prepare ( $sql );
+    $requete->bindValue ( ":vil_num", $vil_num );
+
+    $requete->execute ();
+
+    $resultat = $requete->fetch ( PDO::FETCH_OBJ );
+
+    if ($resultat != null) // La ville existe déjà
+    {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
 
 

@@ -28,7 +28,6 @@ $mots = $motManager->getAllMotsObjets();
 
       <?php
       foreach ($mots as $mot) {
-        //var_dump($mot);
         include("include/pages/tab/afficherUnMotInterdit.tab.inc.php");
       }
       ?>

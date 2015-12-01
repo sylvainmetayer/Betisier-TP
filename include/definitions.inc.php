@@ -1,7 +1,8 @@
 <?php
-define('NOM_LECTURE_FICHIER', "ideesCitations.txt");
+define('NOM_LECTURE_FICHIER', "admin/ideesCitations.txt");
 //define('PWD_INTERDIT', "forbiddenPwd.pwd"); Obselete
-define('SIMUL_MAIL', "simulationMail.md");
+define('SIMUL_MAIL', "admin/simulationMail.md");
+define('README', "README.md");
 
 /*
 Définitions personnelles

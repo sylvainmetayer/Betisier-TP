@@ -54,9 +54,16 @@ class EtudiantManager extends PersonneManager {
     return $retour;
   }
 
-  /*cette fonction permet de supprimer un étudiant et la personne associée*/
+  /*cette fonction permet de supprimer un étudiant et la personne associée. DOIT etre utilisée avec le delete de personneManager*/
   public function delete($per_num) {
-    return parent::deleteByPerNum($per_num);
+    $sql = "DELETE FROM etudiant WHERE per_num=:per_num";
+
+    $requete = $this->db->prepare($sql);
+    $requete->bindValue("per_num", $per_num);
+
+    $retour = $requete->execute();
+
+    return $retour;
   }
 
   /*

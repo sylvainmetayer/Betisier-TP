@@ -35,6 +35,16 @@ class DepartementManager {
     return $listeDepartements;
   }
 
+  public function delete($dep_num) {
+    $sql = "DELETE FROM departement WHERE dep_num=:dep_num";
+
+    $requete = $this->db->prepare($sql);
+
+    $requete->bindValue("dep_num", $dep_num);
+    $retour = $requete->execute();
+    return $retour;
+  }
+
 
 
 }
