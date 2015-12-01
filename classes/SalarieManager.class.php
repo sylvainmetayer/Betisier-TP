@@ -67,6 +67,20 @@ class SalarieManager extends PersonneManager {
   *Fonction pour supprimer un utilisateur de salarie uniquement, et non de personne. Utilise pour l'update si on change la catégorie de la personne.
   */
   public function deleteForChange($per_num) {
+    $voteManager = new VoteManager($this->db);
+    $citationManager = new CitationManager($this->db);
+
+    $citationToDelete = $citationManager->getCitationToDeleteForProf($per_num);
+
+    if (isset($citationToDelete)) {
+        foreach ($citationToDelete as $citation) {
+          $voteManager->deleteVoteByCitNum($citation->getCitationPerNum());
+          $citationManager->deleteCitationByCitNum($citation->getCitationPerNum());
+        }
+    }
+
+    $citationManager->deleteByPerNum($per_num);
+
     $sql = "DELETE FROM salarie WHERE per_num=:per_num";
 
     $requete = $this->db->prepare($sql);

@@ -14,7 +14,7 @@ if (!isConnected() || !getPersonneConnectee()->isPerAdmin()) {
 $mail = implode(lireFichier(SIMUL_MAIL));
 
 if (strlen($mail) == 0) {
-  afficherMessageErreur('Aucun messages reçus !');
+  afficherMessageErreur('Aucun message reçu !');
 } else {
   $parsedown = new Parsedown();
 

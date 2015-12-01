@@ -66,10 +66,21 @@ class EtudiantManager extends PersonneManager {
     return $retour;
   }
 
-  /*
-  *Fonction pour supprimer un utilisateur de salarie uniquement, et non de personne. Utilise pour l'update si on change la catégorie de la personne.
-  */
   public function deleteForChange($per_num) {
+    $voteManager = new VoteManager($this->db);
+    $citationManager = new CitationManager($this->db);
+
+    $citationToDelete = $citationManager->getCitationToDeleteForStudent($per_num);
+
+    if (isset($citationToDelete)) {
+        foreach ($citationToDelete as $citation) {
+          $voteManager->deleteVoteByCitNum($citation->getCitationPerNum());
+          $citationManager->deleteCitationByCitNum($citation->getCitationPerNum());
+        }
+    }
+
+    $citationManager->deleteByPerNum($per_num);
+
     $sql = "DELETE FROM vote WHERE per_num=:per_num; DELETE FROM citation WHERE per_num_etu=:per_num; DELETE FROM etudiant WHERE per_num=:per_num";
 
     $requete = $this->db->prepare($sql);

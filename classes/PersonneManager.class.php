@@ -106,6 +106,7 @@ class PersonneManager {
       if (isset($listeCitationDeLaPersonne)) {
         foreach ($listeCitationDeLaPersonne as $citation) {
           $voteManager->deleteVoteByCitNum($citation->getCitationNum());
+          $citationManager->deleteCitationByCitNum($citation->getCitationNum());
         }
       }
     } else {
@@ -113,9 +114,9 @@ class PersonneManager {
       if (isset($listeCitationDeLaPersonne)) {
         foreach ($listeCitationDeLaPersonne as $citation) {
           $voteManager->deleteVoteByCitNum($citation->getCitationNum());
+          $citationManager->deleteCitationByCitNum($citation->getCitationNum());
         }
       }
-
     }
 
     if (isset($listeVoteDeLaPersonne)) {
