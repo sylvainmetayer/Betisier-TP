@@ -40,6 +40,7 @@ DUT Informatique 2ème Année. Ce site est disponible à l'adresse suivante : [B
 - Une personne connectée peut changer son mot de passe
 - On masque les détails d'une personne aux utilisateurs non connectés
 - Test du référencement (Essayez de rechercher "betisier IUT" ou "betisier sylvain metayer" sur Google)
+- Il n'est pas possible de saisir du javascript dans les champs de saisie (empeche d'executer du code js)
 
 ## 4- Mise en service
 1. Cloner le dépôt [Betisier](https://github.com/sylvainmetayer/Betisier-TP)
