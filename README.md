@@ -1,6 +1,6 @@
 # Betisier-TP
 
-DUT Informatique 2ème Année. Ce site est disponible à l'adresse suivante : [Betisier de Sylvain Metayer](http://www.betisier.sylvainmetayer.fr).
+DUT Informatique 2ème Année. Ce site est disponible à l'adresse suivante : [Betisier de Sylvain Metayer](http://betisier.sylvainmetayer.fr).
 
 ## 1- Informations
 - Les mots interdits doivent être constitué au minimum de 3 lettres, il s'agit d'un réglage MySQL. [Détails ici](http://stackoverflow.com/a/17797003)
