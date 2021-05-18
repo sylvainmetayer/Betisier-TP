@@ -1,0 +1,25 @@
+---
+version: "2.1"
+services:
+  betisier:
+    image: ghcr.io/sylvainmetayer/betisier-tp:latest
+    build: .
+    container_name: betisier
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+    volumes:
+      - ./config:/config
+    ports:
+      - 8080:80
+    restart: 'no'
+  mysql:
+    container_name: betisier_bdd
+    image: mysql:5.7
+    environment:
+        MYSQL_ROOT_USER: betisier
+        MYSQL_ROOT_PASSWORD: betisier
+        MYSQL_DATABASE: betisier
+        MYSQL_USER: betisier
+        MYSQL_PASSWORD: betisier

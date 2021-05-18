@@ -1,5 +1,6 @@
-include/config.inc.php
+src/include/config.inc.php
 simulationMail.md
 
 # Google files
 google*
+/config/

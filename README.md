@@ -49,8 +49,10 @@ DUT Informatique 2ème Année. Ce site est disponible à l'adresse suivante : [B
 3. Configurer le fichier "include/config.inc.php" dont le modèle se trouve ci-dessous
 4. S'assurer que les fichiers "admin/ideesCitations.txt" et "admin/simulationMail.md" existent.
 
-###Structure des fichiers de configurations
+### Structure des fichiers de configurations
+
 "include/config.inc.php" : Le grain de sel est utilisé pour générer un hash du mot de passe. Plus il est complexe, plus votre hash sera résistant !
+
 ```
 define('DBHOST', "");
 define('DBNAME', "");
@@ -69,3 +71,27 @@ Options -Indexes
 deny from all
 </Files>
 ```
+
+### Docker setup
+
+Use `docker-compose.yml` provided in this repository and adapt MySQL parameters.
+
+Create `config/config.inc.php` with following content
+
+```php
+<?php
+define('DBHOST', "betisier_bdd");
+define('DBNAME', "betisier");
+define('DBUSER', "betisier");
+define('DBPASSWD', "betisier");
+define('GRAIN_SEL', "aSecureAndLongRandomStringPleaseChangeMe");
+define('ENV','prod');
+```
+
+- `docker-compose up -d`
+- Import SQL database (or use init volume of MySQL, see [documentation](https://hub.docker.com/_/mysql))
+- Go to `http://localhost:8080`
+
+#### Known issues
+
+`/usr/share/webapps/betisier/admin/` folder is not persisted, which means contact requests are not persisted. As this is an old school project, this is not important and acceptable.
