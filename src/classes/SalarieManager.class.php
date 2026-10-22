@@ -1,5 +1,6 @@
 <?php
 class SalarieManager extends PersonneManager {
+  private $db;
 
   public function __construct($db) {
     parent::__construct($db);

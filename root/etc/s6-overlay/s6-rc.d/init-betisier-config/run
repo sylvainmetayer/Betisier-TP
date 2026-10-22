@@ -1,0 +1,31 @@
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
+
+# create symlinks
+symlinks=(/usr/share/webapps/betisier/include/config.inc.php)
+
+for i in "${symlinks[@]}"; do
+    [[ -e "$i" && ! -L "$i" ]] && mv "$i" "${i}.bak"
+    [[ ! -L "$i" ]] && ln -s "/config/$(basename "$i")" "$i"
+done
+
+# the site config belongs to the app: replace it when it does not match the
+# shipped sample, which also covers the site-confs/default of the images built
+# before the move to s6-overlay v3 (init-migrations renames it default.conf)
+site_conf=/config/nginx/site-confs/default.conf
+site_sample=/defaults/nginx/site-confs/default.conf.sample
+version() { sed -nE 's|^## Version ([0-9]{4}/[0-9]{2}/[0-9]{2}).*|\1|p' "$1"; }
+if [[ -f "${site_conf}" && "$(version "${site_conf}")" != "$(version "${site_sample}")" ]]; then
+    echo "**** Updating ${site_conf}, previous one saved to /config/nginx/default.conf.bak ****"
+    cp "${site_conf}" /config/nginx/default.conf.bak
+    cp "${site_sample}" "${site_conf}"
+fi
+# left over when default.conf already existed: nginx.conf no longer includes it
+if [[ -f /config/nginx/site-confs/default ]]; then
+    echo "**** Removing legacy /config/nginx/site-confs/default ****"
+    rm -f /config/nginx/site-confs/default
+fi
+
+# permissions
+lsiown -R abc:abc \
+    /usr/share/webapps/betisier
