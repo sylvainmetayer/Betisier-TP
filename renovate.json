@@ -1,0 +1,33 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+  ],
+  "timezone": "Europe/Paris",
+  "enabledManagers": [
+    "dockerfile",
+    "github-actions"
+  ],
+  "packageRules": [
+    {
+      "matchDatasources": [
+        "docker"
+      ],
+      "pinDigests": true
+    },
+    {
+      "description": "PHP comes with the linuxserver base image: a new digest of the same tag is a rebuild carrying the latest Alpine/PHP fixes. Merged as soon as the image builds (CI on the PR); Renovate merges itself, after the checks, rather than through GitHub auto-merge, which would merge right away without a required check. A new tag (Alpine branch, maybe a new PHP branch and php8x-* package names) stays a PR to review",
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchPackageNames": [
+        "ghcr.io/linuxserver/baseimage-alpine-nginx"
+      ],
+      "matchUpdateTypes": [
+        "digest"
+      ],
+      "automerge": true,
+      "platformAutomerge": false
+    }
+  ]
+}
