@@ -1,6 +1,7 @@
 <?php
 /*Cette classe étend le comportement de PersonneManager */
 class EtudiantManager extends PersonneManager {
+  private $db;
 
   public function __construct($db) {
     parent::__construct($db);

@@ -189,7 +189,7 @@ class CitationManager {
     if ($citation->getCitationValide() == 1) {
       $sql = "UPDATE citation SET per_num_valide=:per_num_valide, cit_date_valide=NOW(), cit_valide=:cit_valide WHERE cit_num=:cit_num ";
       $requete = $this->db->prepare($sql);
-      $requete->bindValue(":cit_valide", 1);
+      $requete->bindValue(":cit_valide", 1, PDO::PARAM_INT);
     }
 
     $requete->bindValue(":per_num_valide", $citation->getCitationPerNumValide());

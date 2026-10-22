@@ -260,6 +260,10 @@
 
 	function lireFichier($file) {
 		$fichier=file($file);
+		// file() retourne false si le fichier n'existe pas, ce que implode() refuse depuis PHP 8
+		if ($fichier === false) {
+			return array();
+		}
 		return $fichier;
 	}
 
