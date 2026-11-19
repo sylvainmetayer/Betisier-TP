@@ -28,6 +28,14 @@
       ],
       "automerge": true,
       "platformAutomerge": false
+    },
+    {
+      "description": "GitHub Actions of the publish workflow: merged by Renovate once the PR build passes, majors included (the PR builds the image with the new action)",
+      "matchManagers": [
+        "github-actions"
+      ],
+      "automerge": true,
+      "platformAutomerge": false
     }
   ]
 }
