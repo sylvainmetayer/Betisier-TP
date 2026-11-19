@@ -16,7 +16,7 @@ services:
     restart: 'no'
   mysql:
     container_name: betisier_bdd
-    image: mysql:5.7
+    image: mariadb:11.8.9
     environment:
         MYSQL_ROOT_USER: betisier
         MYSQL_ROOT_PASSWORD: betisier
